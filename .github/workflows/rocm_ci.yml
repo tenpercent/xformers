@@ -1,20 +1,28 @@
-name: ROCM_CI
+name: rocm-ci
 
 on: 
   pull_request:
     types: [labeled, synchronize, reopened]
+    paths:
+      - "xformers/**"
+      - "!xformers/benchmarks/**"
+      - "!xformers/version.txt"
+      - ".github/workflows/gpu_test_gh*"
+      - "tests/**"
+      - "setup.py"
+      - "requirements*.txt"
+      - "third_party/**"
   workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'     
-        required: true
-        default: 'warning'
+  push:
+    branches:
+      - develop
   schedule:
     - cron: "15 1 * * *"
 
 jobs:
   build:
     runs-on: self-hosted
+    if: github.repository == 'rocm/xformers' || github.event_name == 'pull_request'
     container:
       image: 'rocm/pytorch-nightly:latest'
       options: ' --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --device=/dev/kfd --device=/dev/dri --group-add video --ipc=host --shm-size 8G '
