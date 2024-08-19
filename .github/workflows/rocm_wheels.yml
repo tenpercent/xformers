@@ -4,6 +4,13 @@ on:
   push:
     branches:
       - develop
+  pull_request:
+    paths:
+      - "packaging/compute_wheel_version.sh"
+      - ".github/workflows/wheel*"
+      - ".github/actions/setup-windows-runner/action.yml"
+      - "setup.py"
+      - "requirements*.txt"
   workflow_dispatch:
 
 jobs:
@@ -24,8 +31,8 @@ jobs:
 
         include = []
         for os in ['ubuntu-alola']:
-          for python in TORCH_VERSIONS:
-            for torch_version in ['2.4.0']:
+          for python in PY_VERSIONS:
+            for torch_version in TORCH_VERSIONS:
               for toolkit_type, toolkit_short_versions in {'rocm': ["6.0", "6.1"]}.items():
                 for toolkit_short_version in toolkit_short_versions:
                   include.append(dict(

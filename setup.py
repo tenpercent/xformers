@@ -402,9 +402,8 @@ def get_extensions():
             "--ptxas-options=-O2",
             "--ptxas-options=-allow-expensive-optimizations=true",
         ]
-    elif (
-        (torch.cuda.is_available() and torch.version.hip) or
-        (os.getenv("FORCE_ROCM", "0") == "1")
+    elif (torch.cuda.is_available() and torch.version.hip) or (
+        os.getenv("FORCE_ROCM", "0") == "1"
     ):
         disable_hd256_hip_fmha = os.getenv("DISABLE_HD256_HIP_FMHA", "0")
         if disable_hd256_hip_fmha == "1":

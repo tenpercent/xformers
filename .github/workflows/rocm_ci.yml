@@ -22,6 +22,9 @@ on:
 jobs:
   build:
     runs-on: self-hosted
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
     if: github.repository == 'rocm/xformers' || github.event_name == 'pull_request'
     container:
       image: 'rocm/pytorch-nightly:latest'
