@@ -26,8 +26,8 @@ void run_batched_infer_mask_bias_dropout_dispatch(
       FMHA_FWD_SEQLEN_Q_SWITCH(param.M, MaxSeqlenQ, [&] {
         batched_infer_splitkv_mask_bias_dropout_dispatch<
             ScalarType,
-            kHasMask,
-            kHasBias,
+            ck_tile::bool_constant<kHasMask>,
+            ck_tile::bool_constant<kHasBias>,
             MaxK,
             MaxSeqlenQ>::Run(param, stream);
       });
