@@ -19,9 +19,9 @@
 
 template <
     typename ScalarType,
-    bool kHasMask,
-    bool kHasBias,
-    bool kHasDropout,
+    typename HasMask,
+    typename HasBias,
+    typename HasDropout,
     ck_tile::index_t MaxK>
 struct grouped_infer_mask_bias_dropout_dispatch {
   template <typename FmhaTraits, typename FmhaMask>
@@ -43,13 +43,13 @@ struct grouped_infer_mask_bias_dropout_dispatch {
       FmhaTraits>;
 
   static void Run(GroupedForwardParams& param, hipStream_t stream) {
-    using FmhaMask = ck_tile::SimplifiedGenericAttentionMask<kHasMask>;
+    using FmhaMask = ck_tile::SimplifiedGenericAttentionMask<HasMask::value>;
 
     using FmhaShape = FmhaFwdShape<MaxK>;
     constexpr ck_tile::index_t occupancy =
         (MaxK == 64) ? 3 : ((MaxK == 256) ? 1 : 2);
 
-    constexpr auto kBiasEnum = kHasBias
+    constexpr auto kBiasEnum = HasBias::value
         ? ck_tile::BlockAttentionBiasEnum::ELEMENTWISE_BIAS
         : ck_tile::BlockAttentionBiasEnum::NO_BIAS;
 
@@ -59,7 +59,7 @@ struct grouped_infer_mask_bias_dropout_dispatch {
     bool pad_headdim_q = !(param.K % FmhaShape::kSubQKHeaddim == 0);
     bool pad_headdim_v = !(param.Kv % FmhaShape::kN1 == 0);
     const bool use_async_pipeline =
-        (!kHasBias && (param.K % 8 == 0) && (param.Kv % 8 == 0) &&
+        (!HasBias::value && (param.K % 8 == 0) && (param.Kv % 8 == 0) &&
          (MaxK <= 128));
 
     if (!use_async_pipeline) {
@@ -73,7 +73,7 @@ struct grouped_infer_mask_bias_dropout_dispatch {
                 kBiasEnum,
                 false, // kHasBiasGrad place-holder
                 false, // kStoreLSE
-                kHasDropout,
+                HasDropout::value,
                 false, // kDoFp8StaticQuant place-holder
                 occupancy>;
 
@@ -120,7 +120,7 @@ struct grouped_infer_mask_bias_dropout_dispatch {
           kBiasEnum,
           false, // kHasBiasGrad place-holder
           false, // kStoreLSE
-          kHasDropout,
+          HasDropout::value,
           false, // kDoFp8StaticQuant place-holder
           occupancy>;
 

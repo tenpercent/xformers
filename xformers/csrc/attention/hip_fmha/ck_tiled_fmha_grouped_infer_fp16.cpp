@@ -19,18 +19,18 @@ void grouped_infer_fp16(GroupedForwardParams& param, hipStream_t stream) {
       if (param.custom_mask_type == 0 && param.window_size <= 0)
         run_grouped_infer_mask_bias_dropout_dispatch<
             ck_tile::fp16_t,
-            false,
-            kHasBias,
-            kHasDropout,
+            has_mask_t<false>,
+            has_bias_t<kHasBias>,
+            has_dropout_t<kHasDropout>,
             MaxK>(param, stream);
       else if (
           param.custom_mask_type == 1 || param.custom_mask_type == 2 ||
           param.window_size > 0)
         run_grouped_infer_mask_bias_dropout_dispatch<
             ck_tile::fp16_t,
-            true,
-            kHasBias,
-            kHasDropout,
+            has_mask_t<true>,
+            has_bias_t<kHasBias>,
+            has_dropout_t<kHasDropout>,
             MaxK>(param, stream);
       else
         throw std::runtime_error("Invalid custom_mask_type value");

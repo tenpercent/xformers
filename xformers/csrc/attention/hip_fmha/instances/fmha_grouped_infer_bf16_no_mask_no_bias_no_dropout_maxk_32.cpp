@@ -13,7 +13,7 @@
 
 template void run_grouped_infer_mask_bias_dropout_dispatch<
     ck_tile::bf16_t,
-    false,
-    false,
-    false,
+    has_mask_t<false>,
+    has_bias_t<false>,
+    has_dropout_t<false>,
     32>(GroupedForwardParams& param, hipStream_t stream);

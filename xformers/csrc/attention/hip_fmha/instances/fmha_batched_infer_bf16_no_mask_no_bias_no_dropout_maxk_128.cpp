@@ -13,7 +13,7 @@
 
 template void run_batched_infer_mask_bias_dropout_dispatch<
     ck_tile::bf16_t,
-    false,
-    false,
-    false,
+    has_mask_t<false>,
+    has_bias_t<false>,
+    has_dropout_t<false>,
     128>(BatchedForwardParams& param, hipStream_t stream);

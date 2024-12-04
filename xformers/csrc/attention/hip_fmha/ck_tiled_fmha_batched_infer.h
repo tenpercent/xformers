@@ -10,24 +10,33 @@
 #include "ck_tiled_fmha_batched_infer_splitkv_dispatch.h"
 #include "ck_tiled_fmha_seqlen_q_switch.h"
 
+  template<bool v>
+  struct has_mask_t : ck_tile::bool_constant<v> {};
+
+  template<bool v>
+  struct has_bias_t : ck_tile::bool_constant<v> {};
+
+  template<bool v>
+  struct has_dropout_t : ck_tile::bool_constant<v> {};
+
 template <
     typename ScalarType,
-    bool kHasMask,
-    bool kHasBias,
-    bool kHasDropout,
+    typename HasMask,
+    typename HasBias,
+    typename HasDropout,
     ck_tile::index_t MaxK>
 void run_batched_infer_mask_bias_dropout_dispatch(
     BatchedForwardParams& param,
     hipStream_t stream) {
   // currently split-kv implementation does not support dropout
-  if constexpr (!kHasDropout) {
+  if constexpr (!HasDropout::value) {
 #ifndef FMHA_FWD_SPLITKV_NOT_USED
     if (param.use_split_kv) {
       FMHA_FWD_SEQLEN_Q_SWITCH(param.M, MaxSeqlenQ, [&] {
         batched_infer_splitkv_mask_bias_dropout_dispatch<
             ScalarType,
-            ck_tile::bool_constant<kHasMask>,
-            ck_tile::bool_constant<kHasBias>,
+            HasMask,
+            HasBias,
             MaxK,
             MaxSeqlenQ>::Run(param, stream);
       });
@@ -35,16 +44,16 @@ void run_batched_infer_mask_bias_dropout_dispatch(
 #endif
       batched_infer_mask_bias_dropout_dispatch<
           ScalarType,
-          kHasMask,
-          kHasBias,
-          kHasDropout,
+          HasMask,
+          HasBias,
+          HasDropout,
           MaxK>::Run(param, stream);
   } else {
     batched_infer_mask_bias_dropout_dispatch<
         ScalarType,
-        kHasMask,
-        kHasBias,
-        kHasDropout,
+        HasMask,
+        HasBias,
+        HasDropout,
         MaxK>::Run(param, stream);
   }
 };

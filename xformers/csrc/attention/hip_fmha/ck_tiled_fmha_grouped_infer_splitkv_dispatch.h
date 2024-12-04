@@ -19,8 +19,8 @@
 
 template <
     typename ScalarType,
-    bool kHasMask,
-    bool kHasBias,
+    typename HasMask,
+    typename HasBias,
     ck_tile::index_t MaxK,
     ck_tile::index_t MaxSeqlenQ>
 struct grouped_infer_splitkv_mask_bias_dropout_dispatch {
@@ -62,7 +62,7 @@ struct grouped_infer_splitkv_mask_bias_dropout_dispatch {
 
   static void Run(GroupedForwardParams& param, hipStream_t stream) {
     {
-      using FmhaMask = ck_tile::SimplifiedGenericAttentionMask<kHasMask>;
+      using FmhaMask = ck_tile::SimplifiedGenericAttentionMask<HasMask::value>;
 
       using FmhaTileShape =
           typename FmhaFwdSplitKVShape<MaxK, MaxSeqlenQ>::Type;
@@ -71,7 +71,7 @@ struct grouped_infer_splitkv_mask_bias_dropout_dispatch {
 
       constexpr ck_tile::index_t occupancy = -1;
 
-      constexpr auto kBiasEnum = kHasBias
+      constexpr auto kBiasEnum = HasBias::value
           ? ck_tile::BlockAttentionBiasEnum::ELEMENTWISE_BIAS
           : ck_tile::BlockAttentionBiasEnum::NO_BIAS;
 
