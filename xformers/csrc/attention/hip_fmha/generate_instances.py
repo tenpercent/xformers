@@ -157,7 +157,7 @@ def create_infer_instances(instance_dir: Path, headdims: List) -> None:
                                 has_mask=f"has_mask_t<{BOOL_MAP[has_mask]}>",
                                 has_bias=f"has_bias_t<{BOOL_MAP[has_bias]}>",
                                 has_dropout=f"has_dropout_t<{BOOL_MAP[has_dropout]}>",
-                                max_k=max_k,
+                                max_k=f"max_head_dimension_t<{max_k}>",
                                 cap_mode=MODE_NAME_MAP[mode],
                             )
                             (instance_dir / fname).write_text(
@@ -194,7 +194,7 @@ def create_infer_instances_ref(instance_dir: Path, headdims: List) -> None:
                                     has_mask=f"has_mask_t<{BOOL_MAP[has_mask]}>",
                                     has_bias=f"has_bias_t<{BOOL_MAP[has_bias]}>",
                                     has_dropout=f"has_dropout_t<{BOOL_MAP[has_dropout]}>",
-                                    max_k=max_k,
+                                    max_k=f"max_head_dimension_t<{max_k}>",
                                     cap_mode=MODE_NAME_MAP[mode],
                                 )
                                 file.write(infer_instance)

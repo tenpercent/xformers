@@ -16,4 +16,4 @@ template void run_grouped_infer_mask_bias_dropout_dispatch<
     has_mask_t<true>,
     has_bias_t<false>,
     has_dropout_t<true>,
-    256>(GroupedForwardParams& param, hipStream_t stream);
+    max_head_dimension_t<256>>(GroupedForwardParams& param, hipStream_t stream);

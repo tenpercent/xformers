@@ -22,7 +22,7 @@ template <
     typename HasMask,
     typename HasBias,
     typename HasDropout,
-    ck_tile::index_t MaxK>
+    typename MaxHeadDimension>
 struct grouped_infer_mask_bias_dropout_dispatch {
   template <typename FmhaTraits, typename FmhaMask>
   using FmhaPipelineProblemTemp = ck_tile::BlockFmhaPipelineProblem<
@@ -37,7 +37,7 @@ struct grouped_infer_mask_bias_dropout_dispatch {
       typename FmhaFwdTypeConfig<ScalarType>::PDataType,
       typename FmhaFwdTypeConfig<ScalarType>::OaccDataType,
       typename FmhaFwdTypeConfig<ScalarType>::ODataType,
-      FmhaFwdShape<MaxK>,
+      FmhaFwdShape<MaxHeadDimension::value>,
       true, // kIsGroupMode
       FmhaMask,
       FmhaTraits>;
@@ -45,9 +45,9 @@ struct grouped_infer_mask_bias_dropout_dispatch {
   static void Run(GroupedForwardParams& param, hipStream_t stream) {
     using FmhaMask = ck_tile::SimplifiedGenericAttentionMask<HasMask::value>;
 
-    using FmhaShape = FmhaFwdShape<MaxK>;
+    using FmhaShape = FmhaFwdShape<MaxHeadDimension::value>;
     constexpr ck_tile::index_t occupancy =
-        (MaxK == 64) ? 3 : ((MaxK == 256) ? 1 : 2);
+        (MaxHeadDimension::value == 64) ? 3 : ((MaxHeadDimension::value == 256) ? 1 : 2);
 
     constexpr auto kBiasEnum = HasBias::value
         ? ck_tile::BlockAttentionBiasEnum::ELEMENTWISE_BIAS
@@ -60,7 +60,7 @@ struct grouped_infer_mask_bias_dropout_dispatch {
     bool pad_headdim_v = !(param.Kv % FmhaShape::kN1 == 0);
     const bool use_async_pipeline =
         (!HasBias::value && (param.K % 8 == 0) && (param.Kv % 8 == 0) &&
-         (MaxK <= 128));
+         (MaxHeadDimension::value <= 128));
 
     if (!use_async_pipeline) {
       BOOL_SWITCH_2(

@@ -15,14 +15,14 @@
 void grouped_infer_bf16(GroupedForwardParams& param, hipStream_t stream) {
   const bool has_dropout = (param.dropout_prob > 0.0f);
   BOOL_SWITCH_2(param.has_attn_bias, kHasBias, has_dropout, kHasDropout, [&] {
-    FMHA_FWD_HEADDIM_SWITCH(param.K, param.Kv, MaxK, [&] {
+    FMHA_FWD_HEADDIM_SWITCH(param.K, param.Kv, kMaxHeadDimension, [&] {
       if (param.custom_mask_type == 0 && param.window_size <= 0)
         run_grouped_infer_mask_bias_dropout_dispatch<
             ck_tile::bf16_t,
             has_mask_t<false>,
             has_bias_t<kHasBias>,
             has_dropout_t<kHasDropout>,
-            MaxK>(param, stream);
+            max_head_dimension_t<kMaxHeadDimension>>(param, stream);
       else if (
           param.custom_mask_type == 1 || param.custom_mask_type == 2 ||
           param.window_size > 0)
@@ -31,7 +31,7 @@ void grouped_infer_bf16(GroupedForwardParams& param, hipStream_t stream) {
             has_mask_t<true>,
             has_bias_t<kHasBias>,
             has_dropout_t<kHasDropout>,
-            MaxK>(param, stream);
+            max_head_dimension_t<kMaxHeadDimension>>(param, stream);
       else
         throw std::runtime_error("Invalid custom_mask_type value");
     });

@@ -16,277 +16,277 @@ extern template void run_batched_infer_mask_bias_dropout_dispatch<
     has_mask_t<true>,
     has_bias_t<true>,
     has_dropout_t<true>,
-    32>(BatchedForwardParams& param, hipStream_t stream);
+    max_head_dimension_t<32>>(BatchedForwardParams& param, hipStream_t stream);
 
 extern template void run_batched_infer_mask_bias_dropout_dispatch<
     ck_tile::bf16_t,
     has_mask_t<false>,
     has_bias_t<true>,
     has_dropout_t<true>,
-    32>(BatchedForwardParams& param, hipStream_t stream);
+    max_head_dimension_t<32>>(BatchedForwardParams& param, hipStream_t stream);
 
 extern template void run_batched_infer_mask_bias_dropout_dispatch<
     ck_tile::bf16_t,
     has_mask_t<true>,
     has_bias_t<true>,
     has_dropout_t<false>,
-    32>(BatchedForwardParams& param, hipStream_t stream);
+    max_head_dimension_t<32>>(BatchedForwardParams& param, hipStream_t stream);
 
 extern template void run_batched_infer_mask_bias_dropout_dispatch<
     ck_tile::bf16_t,
     has_mask_t<false>,
     has_bias_t<true>,
     has_dropout_t<false>,
-    32>(BatchedForwardParams& param, hipStream_t stream);
+    max_head_dimension_t<32>>(BatchedForwardParams& param, hipStream_t stream);
 
 extern template void run_batched_infer_mask_bias_dropout_dispatch<
     ck_tile::bf16_t,
     has_mask_t<true>,
     has_bias_t<false>,
     has_dropout_t<true>,
-    32>(BatchedForwardParams& param, hipStream_t stream);
+    max_head_dimension_t<32>>(BatchedForwardParams& param, hipStream_t stream);
 
 extern template void run_batched_infer_mask_bias_dropout_dispatch<
     ck_tile::bf16_t,
     has_mask_t<false>,
     has_bias_t<false>,
     has_dropout_t<true>,
-    32>(BatchedForwardParams& param, hipStream_t stream);
+    max_head_dimension_t<32>>(BatchedForwardParams& param, hipStream_t stream);
 
 extern template void run_batched_infer_mask_bias_dropout_dispatch<
     ck_tile::bf16_t,
     has_mask_t<true>,
     has_bias_t<false>,
     has_dropout_t<false>,
-    32>(BatchedForwardParams& param, hipStream_t stream);
+    max_head_dimension_t<32>>(BatchedForwardParams& param, hipStream_t stream);
 
 extern template void run_batched_infer_mask_bias_dropout_dispatch<
     ck_tile::bf16_t,
     has_mask_t<false>,
     has_bias_t<false>,
     has_dropout_t<false>,
-    32>(BatchedForwardParams& param, hipStream_t stream);
-
-extern template void run_batched_infer_mask_bias_dropout_dispatch<
-    ck_tile::bf16_t,
-    has_mask_t<true>,
-    has_bias_t<true>,
-    has_dropout_t<true>,
-    64>(BatchedForwardParams& param, hipStream_t stream);
-
-extern template void run_batched_infer_mask_bias_dropout_dispatch<
-    ck_tile::bf16_t,
-    has_mask_t<false>,
-    has_bias_t<true>,
-    has_dropout_t<true>,
-    64>(BatchedForwardParams& param, hipStream_t stream);
-
-extern template void run_batched_infer_mask_bias_dropout_dispatch<
-    ck_tile::bf16_t,
-    has_mask_t<true>,
-    has_bias_t<true>,
-    has_dropout_t<false>,
-    64>(BatchedForwardParams& param, hipStream_t stream);
-
-extern template void run_batched_infer_mask_bias_dropout_dispatch<
-    ck_tile::bf16_t,
-    has_mask_t<false>,
-    has_bias_t<true>,
-    has_dropout_t<false>,
-    64>(BatchedForwardParams& param, hipStream_t stream);
-
-extern template void run_batched_infer_mask_bias_dropout_dispatch<
-    ck_tile::bf16_t,
-    has_mask_t<true>,
-    has_bias_t<false>,
-    has_dropout_t<true>,
-    64>(BatchedForwardParams& param, hipStream_t stream);
-
-extern template void run_batched_infer_mask_bias_dropout_dispatch<
-    ck_tile::bf16_t,
-    has_mask_t<false>,
-    has_bias_t<false>,
-    has_dropout_t<true>,
-    64>(BatchedForwardParams& param, hipStream_t stream);
-
-extern template void run_batched_infer_mask_bias_dropout_dispatch<
-    ck_tile::bf16_t,
-    has_mask_t<true>,
-    has_bias_t<false>,
-    has_dropout_t<false>,
-    64>(BatchedForwardParams& param, hipStream_t stream);
-
-extern template void run_batched_infer_mask_bias_dropout_dispatch<
-    ck_tile::bf16_t,
-    has_mask_t<false>,
-    has_bias_t<false>,
-    has_dropout_t<false>,
-    64>(BatchedForwardParams& param, hipStream_t stream);
+    max_head_dimension_t<32>>(BatchedForwardParams& param, hipStream_t stream);
 
 extern template void run_batched_infer_mask_bias_dropout_dispatch<
     ck_tile::bf16_t,
     has_mask_t<true>,
     has_bias_t<true>,
     has_dropout_t<true>,
-    96>(BatchedForwardParams& param, hipStream_t stream);
+    max_head_dimension_t<64>>(BatchedForwardParams& param, hipStream_t stream);
 
 extern template void run_batched_infer_mask_bias_dropout_dispatch<
     ck_tile::bf16_t,
     has_mask_t<false>,
     has_bias_t<true>,
     has_dropout_t<true>,
-    96>(BatchedForwardParams& param, hipStream_t stream);
+    max_head_dimension_t<64>>(BatchedForwardParams& param, hipStream_t stream);
 
 extern template void run_batched_infer_mask_bias_dropout_dispatch<
     ck_tile::bf16_t,
     has_mask_t<true>,
     has_bias_t<true>,
     has_dropout_t<false>,
-    96>(BatchedForwardParams& param, hipStream_t stream);
+    max_head_dimension_t<64>>(BatchedForwardParams& param, hipStream_t stream);
 
 extern template void run_batched_infer_mask_bias_dropout_dispatch<
     ck_tile::bf16_t,
     has_mask_t<false>,
     has_bias_t<true>,
     has_dropout_t<false>,
-    96>(BatchedForwardParams& param, hipStream_t stream);
+    max_head_dimension_t<64>>(BatchedForwardParams& param, hipStream_t stream);
 
 extern template void run_batched_infer_mask_bias_dropout_dispatch<
     ck_tile::bf16_t,
     has_mask_t<true>,
     has_bias_t<false>,
     has_dropout_t<true>,
-    96>(BatchedForwardParams& param, hipStream_t stream);
+    max_head_dimension_t<64>>(BatchedForwardParams& param, hipStream_t stream);
 
 extern template void run_batched_infer_mask_bias_dropout_dispatch<
     ck_tile::bf16_t,
     has_mask_t<false>,
     has_bias_t<false>,
     has_dropout_t<true>,
-    96>(BatchedForwardParams& param, hipStream_t stream);
+    max_head_dimension_t<64>>(BatchedForwardParams& param, hipStream_t stream);
 
 extern template void run_batched_infer_mask_bias_dropout_dispatch<
     ck_tile::bf16_t,
     has_mask_t<true>,
     has_bias_t<false>,
     has_dropout_t<false>,
-    96>(BatchedForwardParams& param, hipStream_t stream);
+    max_head_dimension_t<64>>(BatchedForwardParams& param, hipStream_t stream);
 
 extern template void run_batched_infer_mask_bias_dropout_dispatch<
     ck_tile::bf16_t,
     has_mask_t<false>,
     has_bias_t<false>,
     has_dropout_t<false>,
-    96>(BatchedForwardParams& param, hipStream_t stream);
-
-extern template void run_batched_infer_mask_bias_dropout_dispatch<
-    ck_tile::bf16_t,
-    has_mask_t<true>,
-    has_bias_t<true>,
-    has_dropout_t<true>,
-    128>(BatchedForwardParams& param, hipStream_t stream);
-
-extern template void run_batched_infer_mask_bias_dropout_dispatch<
-    ck_tile::bf16_t,
-    has_mask_t<false>,
-    has_bias_t<true>,
-    has_dropout_t<true>,
-    128>(BatchedForwardParams& param, hipStream_t stream);
-
-extern template void run_batched_infer_mask_bias_dropout_dispatch<
-    ck_tile::bf16_t,
-    has_mask_t<true>,
-    has_bias_t<true>,
-    has_dropout_t<false>,
-    128>(BatchedForwardParams& param, hipStream_t stream);
-
-extern template void run_batched_infer_mask_bias_dropout_dispatch<
-    ck_tile::bf16_t,
-    has_mask_t<false>,
-    has_bias_t<true>,
-    has_dropout_t<false>,
-    128>(BatchedForwardParams& param, hipStream_t stream);
-
-extern template void run_batched_infer_mask_bias_dropout_dispatch<
-    ck_tile::bf16_t,
-    has_mask_t<true>,
-    has_bias_t<false>,
-    has_dropout_t<true>,
-    128>(BatchedForwardParams& param, hipStream_t stream);
-
-extern template void run_batched_infer_mask_bias_dropout_dispatch<
-    ck_tile::bf16_t,
-    has_mask_t<false>,
-    has_bias_t<false>,
-    has_dropout_t<true>,
-    128>(BatchedForwardParams& param, hipStream_t stream);
-
-extern template void run_batched_infer_mask_bias_dropout_dispatch<
-    ck_tile::bf16_t,
-    has_mask_t<true>,
-    has_bias_t<false>,
-    has_dropout_t<false>,
-    128>(BatchedForwardParams& param, hipStream_t stream);
-
-extern template void run_batched_infer_mask_bias_dropout_dispatch<
-    ck_tile::bf16_t,
-    has_mask_t<false>,
-    has_bias_t<false>,
-    has_dropout_t<false>,
-    128>(BatchedForwardParams& param, hipStream_t stream);
+    max_head_dimension_t<64>>(BatchedForwardParams& param, hipStream_t stream);
 
 extern template void run_batched_infer_mask_bias_dropout_dispatch<
     ck_tile::bf16_t,
     has_mask_t<true>,
     has_bias_t<true>,
     has_dropout_t<true>,
-    256>(BatchedForwardParams& param, hipStream_t stream);
+    max_head_dimension_t<96>>(BatchedForwardParams& param, hipStream_t stream);
 
 extern template void run_batched_infer_mask_bias_dropout_dispatch<
     ck_tile::bf16_t,
     has_mask_t<false>,
     has_bias_t<true>,
     has_dropout_t<true>,
-    256>(BatchedForwardParams& param, hipStream_t stream);
+    max_head_dimension_t<96>>(BatchedForwardParams& param, hipStream_t stream);
 
 extern template void run_batched_infer_mask_bias_dropout_dispatch<
     ck_tile::bf16_t,
     has_mask_t<true>,
     has_bias_t<true>,
     has_dropout_t<false>,
-    256>(BatchedForwardParams& param, hipStream_t stream);
+    max_head_dimension_t<96>>(BatchedForwardParams& param, hipStream_t stream);
 
 extern template void run_batched_infer_mask_bias_dropout_dispatch<
     ck_tile::bf16_t,
     has_mask_t<false>,
     has_bias_t<true>,
     has_dropout_t<false>,
-    256>(BatchedForwardParams& param, hipStream_t stream);
+    max_head_dimension_t<96>>(BatchedForwardParams& param, hipStream_t stream);
 
 extern template void run_batched_infer_mask_bias_dropout_dispatch<
     ck_tile::bf16_t,
     has_mask_t<true>,
     has_bias_t<false>,
     has_dropout_t<true>,
-    256>(BatchedForwardParams& param, hipStream_t stream);
+    max_head_dimension_t<96>>(BatchedForwardParams& param, hipStream_t stream);
 
 extern template void run_batched_infer_mask_bias_dropout_dispatch<
     ck_tile::bf16_t,
     has_mask_t<false>,
     has_bias_t<false>,
     has_dropout_t<true>,
-    256>(BatchedForwardParams& param, hipStream_t stream);
+    max_head_dimension_t<96>>(BatchedForwardParams& param, hipStream_t stream);
 
 extern template void run_batched_infer_mask_bias_dropout_dispatch<
     ck_tile::bf16_t,
     has_mask_t<true>,
     has_bias_t<false>,
     has_dropout_t<false>,
-    256>(BatchedForwardParams& param, hipStream_t stream);
+    max_head_dimension_t<96>>(BatchedForwardParams& param, hipStream_t stream);
 
 extern template void run_batched_infer_mask_bias_dropout_dispatch<
     ck_tile::bf16_t,
     has_mask_t<false>,
     has_bias_t<false>,
     has_dropout_t<false>,
-    256>(BatchedForwardParams& param, hipStream_t stream);
+    max_head_dimension_t<96>>(BatchedForwardParams& param, hipStream_t stream);
+
+extern template void run_batched_infer_mask_bias_dropout_dispatch<
+    ck_tile::bf16_t,
+    has_mask_t<true>,
+    has_bias_t<true>,
+    has_dropout_t<true>,
+    max_head_dimension_t<128>>(BatchedForwardParams& param, hipStream_t stream);
+
+extern template void run_batched_infer_mask_bias_dropout_dispatch<
+    ck_tile::bf16_t,
+    has_mask_t<false>,
+    has_bias_t<true>,
+    has_dropout_t<true>,
+    max_head_dimension_t<128>>(BatchedForwardParams& param, hipStream_t stream);
+
+extern template void run_batched_infer_mask_bias_dropout_dispatch<
+    ck_tile::bf16_t,
+    has_mask_t<true>,
+    has_bias_t<true>,
+    has_dropout_t<false>,
+    max_head_dimension_t<128>>(BatchedForwardParams& param, hipStream_t stream);
+
+extern template void run_batched_infer_mask_bias_dropout_dispatch<
+    ck_tile::bf16_t,
+    has_mask_t<false>,
+    has_bias_t<true>,
+    has_dropout_t<false>,
+    max_head_dimension_t<128>>(BatchedForwardParams& param, hipStream_t stream);
+
+extern template void run_batched_infer_mask_bias_dropout_dispatch<
+    ck_tile::bf16_t,
+    has_mask_t<true>,
+    has_bias_t<false>,
+    has_dropout_t<true>,
+    max_head_dimension_t<128>>(BatchedForwardParams& param, hipStream_t stream);
+
+extern template void run_batched_infer_mask_bias_dropout_dispatch<
+    ck_tile::bf16_t,
+    has_mask_t<false>,
+    has_bias_t<false>,
+    has_dropout_t<true>,
+    max_head_dimension_t<128>>(BatchedForwardParams& param, hipStream_t stream);
+
+extern template void run_batched_infer_mask_bias_dropout_dispatch<
+    ck_tile::bf16_t,
+    has_mask_t<true>,
+    has_bias_t<false>,
+    has_dropout_t<false>,
+    max_head_dimension_t<128>>(BatchedForwardParams& param, hipStream_t stream);
+
+extern template void run_batched_infer_mask_bias_dropout_dispatch<
+    ck_tile::bf16_t,
+    has_mask_t<false>,
+    has_bias_t<false>,
+    has_dropout_t<false>,
+    max_head_dimension_t<128>>(BatchedForwardParams& param, hipStream_t stream);
+
+extern template void run_batched_infer_mask_bias_dropout_dispatch<
+    ck_tile::bf16_t,
+    has_mask_t<true>,
+    has_bias_t<true>,
+    has_dropout_t<true>,
+    max_head_dimension_t<256>>(BatchedForwardParams& param, hipStream_t stream);
+
+extern template void run_batched_infer_mask_bias_dropout_dispatch<
+    ck_tile::bf16_t,
+    has_mask_t<false>,
+    has_bias_t<true>,
+    has_dropout_t<true>,
+    max_head_dimension_t<256>>(BatchedForwardParams& param, hipStream_t stream);
+
+extern template void run_batched_infer_mask_bias_dropout_dispatch<
+    ck_tile::bf16_t,
+    has_mask_t<true>,
+    has_bias_t<true>,
+    has_dropout_t<false>,
+    max_head_dimension_t<256>>(BatchedForwardParams& param, hipStream_t stream);
+
+extern template void run_batched_infer_mask_bias_dropout_dispatch<
+    ck_tile::bf16_t,
+    has_mask_t<false>,
+    has_bias_t<true>,
+    has_dropout_t<false>,
+    max_head_dimension_t<256>>(BatchedForwardParams& param, hipStream_t stream);
+
+extern template void run_batched_infer_mask_bias_dropout_dispatch<
+    ck_tile::bf16_t,
+    has_mask_t<true>,
+    has_bias_t<false>,
+    has_dropout_t<true>,
+    max_head_dimension_t<256>>(BatchedForwardParams& param, hipStream_t stream);
+
+extern template void run_batched_infer_mask_bias_dropout_dispatch<
+    ck_tile::bf16_t,
+    has_mask_t<false>,
+    has_bias_t<false>,
+    has_dropout_t<true>,
+    max_head_dimension_t<256>>(BatchedForwardParams& param, hipStream_t stream);
+
+extern template void run_batched_infer_mask_bias_dropout_dispatch<
+    ck_tile::bf16_t,
+    has_mask_t<true>,
+    has_bias_t<false>,
+    has_dropout_t<false>,
+    max_head_dimension_t<256>>(BatchedForwardParams& param, hipStream_t stream);
+
+extern template void run_batched_infer_mask_bias_dropout_dispatch<
+    ck_tile::bf16_t,
+    has_mask_t<false>,
+    has_bias_t<false>,
+    has_dropout_t<false>,
+    max_head_dimension_t<256>>(BatchedForwardParams& param, hipStream_t stream);

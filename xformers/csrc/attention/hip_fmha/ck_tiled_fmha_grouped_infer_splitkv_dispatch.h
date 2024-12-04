@@ -21,8 +21,8 @@ template <
     typename ScalarType,
     typename HasMask,
     typename HasBias,
-    ck_tile::index_t MaxK,
-    ck_tile::index_t MaxSeqlenQ>
+    typename MaxHeadDimension,
+    typename MaxSeqlenQ>
 struct grouped_infer_splitkv_mask_bias_dropout_dispatch {
   template <
       typename FmhaFwdSplitKVTraits,
@@ -40,7 +40,7 @@ struct grouped_infer_splitkv_mask_bias_dropout_dispatch {
           typename FmhaFwdTypeConfig<ScalarType>::PDataType,
           typename FmhaFwdTypeConfig<ScalarType>::OaccDataType,
           ODataType,
-          typename FmhaFwdSplitKVShape<MaxK, MaxSeqlenQ>::Type,
+          typename FmhaFwdSplitKVShape<MaxHeadDimension::value, MaxSeqlenQ::value>::Type,
           true, // kIsGroupMode
           FmhaMask,
           FmhaFwdSplitKVTraits>;
@@ -54,7 +54,7 @@ struct grouped_infer_splitkv_mask_bias_dropout_dispatch {
           typename FmhaFwdTypeConfig<ScalarType>::LSEDataType,
           typename FmhaFwdTypeConfig<ScalarType>::OaccDataType,
           typename FmhaFwdTypeConfig<ScalarType>::ODataType,
-          MaxK, // headdim_v
+          MaxHeadDimension::value, // headdim_v
           kM0,
           kN1,
           true, // kIsGroupMode
@@ -65,7 +65,7 @@ struct grouped_infer_splitkv_mask_bias_dropout_dispatch {
       using FmhaMask = ck_tile::SimplifiedGenericAttentionMask<HasMask::value>;
 
       using FmhaTileShape =
-          typename FmhaFwdSplitKVShape<MaxK, MaxSeqlenQ>::Type;
+          typename FmhaFwdSplitKVShape<MaxHeadDimension::value, MaxSeqlenQ::value>::Type;
       using FmhaTilePartitioner =
           ck_tile::FmhaFwdSplitKVTilePartitioner<FmhaTileShape>;
 
@@ -171,7 +171,7 @@ struct grouped_infer_splitkv_mask_bias_dropout_dispatch {
 
     if (param.num_kv_splits > 1) {
       using FmhaTileShape =
-          typename FmhaFwdSplitKVShape<MaxK, MaxSeqlenQ>::Type;
+          typename FmhaFwdSplitKVShape<MaxHeadDimension::value, MaxSeqlenQ::value>::Type;
 
       constexpr ck_tile::index_t kM0 = FmhaTileShape::kM0 / 2;
       constexpr ck_tile::index_t kN1 = FmhaTileShape::kN1 / 2;
