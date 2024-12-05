@@ -469,6 +469,7 @@ def get_extensions():
                 "-O3",
                 "-std=c++17",
                 *[f"--offload-arch={arch}" for arch in arch_list],
+                "--offload-compress",
                 "-U__CUDA_NO_HALF_OPERATORS__",
                 "-U__CUDA_NO_HALF_CONVERSIONS__",
                 "-DCK_TILE_FMHA_FWD_FAST_EXP2=1",
