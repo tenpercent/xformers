@@ -53,7 +53,8 @@ def _get_seqlen_info(
     attn_bias = inp.attn_bias
     if isinstance(
         attn_bias,
-        (BlockDiagonalMask, BlockDiagonalPaddedKeysMask, BlockDiagonalGappyKeysMask, PagedBlockDiagonalPaddedKeysMask, PagedBlockDiagonalGappyKeysMask)
+        (BlockDiagonalMask, BlockDiagonalPaddedKeysMask, BlockDiagonalGappyKeysMask,
+         PagedBlockDiagonalPaddedKeysMask, PagedBlockDiagonalGappyKeysMask)
     ):
         attn_bias.k_seqinfo.to(inp.query.device)
         attn_bias.q_seqinfo.to(inp.query.device)
