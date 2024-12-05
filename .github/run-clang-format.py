@@ -118,7 +118,7 @@ def run_clang_format_diff(args, file):
             original = f.readlines()
     except IOError as exc:
         raise DiffError(str(exc))
-    invocation = [args.clang_format_executable, file]
+    invocation = [args.clang_format_executable, "-i", file]
 
     # Use of utf-8 to decode the process output.
     #

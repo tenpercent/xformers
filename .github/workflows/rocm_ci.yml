@@ -71,7 +71,7 @@ jobs:
     - name: Build xformers
       run: |
         export PATH=/opt/conda/envs/xformers/bin:$PATH
-        export MAX_JOBS=144
+        export MAX_JOBS=96
         
         python -m pip install -e ./_xformers --verbose
         python -m xformers.info
