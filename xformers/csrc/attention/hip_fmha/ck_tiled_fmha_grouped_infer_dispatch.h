@@ -46,8 +46,9 @@ struct grouped_infer_mask_bias_dropout_dispatch {
     using FmhaMask = ck_tile::SimplifiedGenericAttentionMask<HasMask::value>;
 
     using FmhaShape = FmhaFwdShape<MaxHeadDimension::value>;
-    constexpr ck_tile::index_t occupancy =
-        (MaxHeadDimension::value == 64) ? 3 : ((MaxHeadDimension::value == 256) ? 1 : 2);
+    constexpr ck_tile::index_t occupancy = (MaxHeadDimension::value == 64)
+        ? 3
+        : ((MaxHeadDimension::value == 256) ? 1 : 2);
 
     constexpr auto kBiasEnum = HasBias::value
         ? ck_tile::BlockAttentionBiasEnum::ELEMENTWISE_BIAS
