@@ -463,13 +463,17 @@ def get_extensions():
 
         arch_list = os.getenv("HIP_ARCHITECTURES", "native").split()
 
+        offload_compress_flag = []
+        if "6.2." in hip_version:
+            offload_compress_flag = ["--offload-compress"]
+
         extra_compile_args = {
             "cxx": ["-O3", "-std=c++17"] + generator_flag,
             "nvcc": [
                 "-O3",
                 "-std=c++17",
                 *[f"--offload-arch={arch}" for arch in arch_list],
-                "--offload-compress",
+                *offload_compress_flag,
                 "-U__CUDA_NO_HALF_OPERATORS__",
                 "-U__CUDA_NO_HALF_CONVERSIONS__",
                 "-DCK_TILE_FMHA_FWD_FAST_EXP2=1",
