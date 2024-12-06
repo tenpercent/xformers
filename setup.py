@@ -464,7 +464,7 @@ def get_extensions():
         arch_list = os.getenv("HIP_ARCHITECTURES", "native").split()
 
         offload_compress_flag = []
-        if "6.2." in hip_version:
+        if hip_version >= "6.2.":
             offload_compress_flag = ["--offload-compress"]
 
         extra_compile_args = {
