@@ -15,7 +15,7 @@ jobs:
     runs-on: self-hosted-rocm-ci
     container:
       image: 'rocm/pytorch-nightly:latest'
-      options: ' --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --device=/dev/kfd --device=/dev/dri --group-add video --ipc=host --shm-size 8G --memory 16G --oom-kill-disable '
+      options: ' --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --device=/dev/kfd --device=/dev/dri --group-add video --ipc=host --shm-size 8G --memory 32G '
     steps:
     - uses: actions/checkout@v4
       with:
@@ -71,7 +71,7 @@ jobs:
     - name: Build xformers
       run: |
         export PATH=/opt/conda/envs/xformers/bin:$PATH
-        export MAX_JOBS=80
+        export MAX_JOBS=40
         
         python -m pip install -e ./_xformers --verbose
         python -m xformers.info
